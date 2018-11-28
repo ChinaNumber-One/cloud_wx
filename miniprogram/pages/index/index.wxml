@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='flex_row'>
+    <!-- <text class='iconfont icon-benpao'></text> -->
+    <button open-type="getUserInfo" 
+            data-identity='run'
+            bindgetuserinfo="onGetUserInfo" 
+            bindtap="onGetOpenid"
+            class="userinfo-avatar" 
+            >我选择奔跑侠</button>
+  </view>
+  <view class='flex_row'>
+    <!-- <text class='iconfont icon-kehu'></text> -->
+    <button open-type="getUserInfo" 
+            data-identity='boss'
+            bindgetuserinfo="onGetUserInfo" 
+            bindtap="onGetOpenid"
+            class="userinfo-avatar" 
+            >我选择Boss</button>
+  </view>
+  <!-- <view class="map-container">
+    <map id="map" 
+         show-location='true'
+         markers="{{markers}}" 
+         bindmarkertap="handleMarkerTap" 
+         longitude="{{longitude}}" 
+         latitude="{{latitude}}" 
+         scale="18" 
+         class="map" 
+         subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2"
+         controls="{{controls}}" 
+         bindcontroltap="controltap"></map>
+  </view> -->
+  <!-- 用户 openid -->
+  <view class="userinfo">
+    <!-- <button open-type="getUserInfo" 
+            bindgetuserinfo="onGetUserInfo" 
+            bindtap="onGetOpenid"
+            class="userinfo-avatar" 
+            style="background-image: url({{avatarUrl}})"></button> -->
+  </view>
+
+
+  <!-- 上传图片 -->
+  <!-- <view class="uploader">
+    <view class="uploader-text" bindtap="doUpload">
+      <text>上传图片</text>
+    </view>
+    <view class="uploader-container" wx:if="{{imgUrl}}">
+      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    </view>
+  </view> -->
+
+</view>

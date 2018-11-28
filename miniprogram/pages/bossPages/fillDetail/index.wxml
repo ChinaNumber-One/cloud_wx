@@ -1,0 +1,8 @@
+<!--miniprogram/pages/bossPages/fillDetail/index.wxml-->
+<view class="position border-bottom">{{position}}</view>
+<input placeholder='楼号/门牌号,如：1号楼1单元301' class='detailInput border-bottom'></input>
+<view class='border-bottom contact'>
+  <input placeholder='联系人' class='addresseeInput '></input>
+  <input placeholder='手机号' class="phoneNumInput"></input>
+</view>
+<button bindtap='back'>back</button>

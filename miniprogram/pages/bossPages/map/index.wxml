@@ -1,0 +1,39 @@
+<!--miniprogram/pages/map/index.wxml-->
+<view class="map-container">
+  <map id="map" 
+       show-location='true' 
+       markers="{{markers}}" 
+       bindmarkertap="handleMarkerTap" 
+       longitude="{{longitude}}" 
+       latitude="{{latitude}}"
+       polyline="{{polyline}}" 
+       scale="18" 
+       class="map" 
+       subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2" ></map> 
+</view>
+<view class='tabBox'>
+  <view class='bar'>
+    <view class="sendBar {{types==='send'?'activeBar':''}}" 
+          data-types="send"
+          bindtap='changeTypes'>帮我送</view>
+    <view class="buyBar {{types==='buy'?'activeBar':''}}" 
+          data-types="buy" 
+          bindtap='changeTypes'>帮我买</view>
+  </view>
+  <view class='sendThings' wx:if="{{types==='send'}}">
+    <view class='inputBox' data-locationtype='from' bindtap='choiceLoaction'>
+      <text class="input">{{fromLoaction.name}}</text>
+      <view class='dot' style="background:#93d99d;"></view>
+    </view>
+    <view class='inputBox' data-locationtype='to' bindtap='choiceLoaction'>
+      <text class="input">{{toLoaction.name}}</text>
+      <view class='dot' style="background:#ec8b89;"></view>
+    </view>
+    <view class='sendThingskinds'>
+      <view class='dot' style="background:rgba(53,53,53,0.6);border-radius:0;"></view>
+      <text class='sendThingskindsText'>{{sendThingskindsText}}</text>
+      <text class='iconfont icon-you' ></text>
+    </view>
+  </view>
+  <view class='buyThings' wx:if="{{types==='buy'}}">买</view>
+</view>   
