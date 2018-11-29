@@ -1,0 +1,30 @@
+/* miniprogram/pages/bossPages/addressBook/index.wxss */
+.addressList {
+  width: 100%;
+}
+.addressItem {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+}
+.marginLeft {
+  margin-right: 10px;
+  max-width: 50%;
+}
+.addressInfo {
+  display: flex;
+  font-size: 18px;
+}
+.addressInfo view,
+.addresseeInfo view {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.addresseeInfo {
+  display: flex;
+  font-size: 16px;
+  color: #666;
+  margin-top: 8px;
+}

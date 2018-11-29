@@ -116,6 +116,7 @@ Page({
     this.bicyclingLine()
   },
   handelEndPos(data){
+    console.log('endpos')
     let res = data.data
     // 选择  到达地点
     let endMarkder = {
@@ -232,12 +233,14 @@ Page({
     
   },
   drivingDistance(){
+    console.log('打')
     wx.request({
       url: 'https://apis.map.qq.com/ws/distance/v1/?mode=driving&from=' + this.data.fromLoaction.latitude + ',' + this.data.fromLoaction.longitude + '&to=' + this.data.toLoaction.latitude + ',' + this.data.toLoaction.longitude + '&key=M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2',
       success: this.getdrivingDistanceSuccess.bind(this)
     })
   },
   getdrivingDistanceSuccess(res){
+    console.log(res)
     if (res.statusCode === 200){
       console.log(res.data.result.elements[0].distance+'米')
       console.log(res.data.result.elements[0].duration+'秒')
@@ -284,7 +287,9 @@ Page({
     wx.request(opt);
   },
   choiceAddressBook(e){
-    console.log(e.currentTarget.dataset.locationtype)
+    wx.navigateTo({
+      url: "/pages/bossPages/addressBook/index?locationType=" + e.currentTarget.dataset.locationtype,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

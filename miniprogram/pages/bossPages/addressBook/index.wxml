@@ -1,0 +1,12 @@
+<view class='addressList'>
+  <view class='addressItem' wx:for="{{addressList}}" wx:key="{{item._id}}" bindtap='fillBack' data-info="{{item}}">
+    <view class='addressInfo'>
+      <view class='marginLeft'>{{item.addressName}}</view>
+      <view style='flex:1'>{{item.addressDetail}}</view>
+    </view>
+    <view class='addresseeInfo'>
+      <view class='marginLeft'>{{item.addresseeName}}</view>
+      <view style='flex:1'>{{item.addresseePhoneNum}}</view>
+    </view>
+  </view>
+</view>

@@ -2,10 +2,12 @@
 <view class="position border-bottom" bindtap='choiceLoaction'>{{position}}</view>
 <input placeholder='楼号/门牌号,如：1号楼1单元301' 
        class='detailInput border-bottom'
-       bindinput="detailInputFn"></input>
+       bindinput="detailInputFn"
+       maxlength="50"></input>
 <view class='border-bottom contact'>
   <input placeholder='联系人' 
          class='addresseeInput' 
+         maxlength="30"
          bindinput="addresseeInputFn"></input>
   <input placeholder='{{phonePlaceholder}}'
          class="phoneNumInput" 

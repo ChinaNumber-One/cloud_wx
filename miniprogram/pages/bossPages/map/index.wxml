@@ -24,13 +24,13 @@
     <view class='inputBox' >
       <view class='dot' style="background:#93d99d;"></view>
       <view class="input" data-locationtype='from' bindtap='choiceLoaction'>
-        <view >
-          <text wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</text>
-          <text wx:if="{{fromLoaction.addressDetail}}">{{fromLoaction.addressDetail}}</text>
+        <view class="flex">
+          <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</view>
+          <view class="wordwarp" wx:if="{{fromLoaction.addressDetail}}">{{fromLoaction.addressDetail}}</view>
         </view>
-        <view >
-          <text wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</text>
-          <text wx:if="{{fromLoaction.phoneNum}}">{{fromLoaction.phoneNum}}</text></view>
+        <view class="flex" style="font-size:14px;">
+          <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</view>
+          <view class="wordwarp" wx:if="{{fromLoaction.phoneNum}}">{{fromLoaction.phoneNum}}</view></view>
       </view>
       <view class='addresseeBookBtn' data-locationtype='from' bindtap='choiceAddressBook'>
         地址簿
@@ -39,13 +39,13 @@
     <view class='inputBox' >
       <view class='dot' style="background:#ec8b89;"></view>
       <view class="input" data-locationtype='to' bindtap='choiceLoaction'>
-        <view >
-          <text wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
-          <text wx:if="{{toLoaction.addressDetail}}">{{toLoaction.addressDetail}}</text>
+        <view class="flex">
+          <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
+          <text class="wordwarp" wx:if="{{toLoaction.addressDetail}}">{{toLoaction.addressDetail}}</text>
         </view>
-        <view >
-          <text wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
-          <text wx:if="{{toLoaction.phoneNum}}">{{toLoaction.phoneNum}}</text>
+        <view class="flex" style="font-size:14px;">
+          <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
+          <text class="wordwarp" wx:if="{{toLoaction.phoneNum}}">{{toLoaction.phoneNum}}</text>
         </view>
       </view>
       <view class='addresseeBookBtn' data-locationtype='to' bindtap='choiceAddressBook'>

@@ -188,7 +188,7 @@ Page({
     
     var finalInfo = this.data.storagePos
     finalInfo.detail = this.data.detail
-    finalInfo.addressName = this.data.name
+    finalInfo.addresseeName = this.data.name
     finalInfo.phoneNum = this.data.phoneNum
     finalInfo.sex = this.data.sex
     finalInfo.fillDetail = true
