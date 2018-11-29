@@ -1,8 +1,29 @@
 <!--miniprogram/pages/bossPages/fillDetail/index.wxml-->
-<view class="position border-bottom">{{position}}</view>
-<input placeholder='楼号/门牌号,如：1号楼1单元301' class='detailInput border-bottom'></input>
+<view class="position border-bottom" bindtap='choiceLoaction'>{{position}}</view>
+<input placeholder='楼号/门牌号,如：1号楼1单元301' 
+       class='detailInput border-bottom'
+       bindinput="detailInputFn"></input>
 <view class='border-bottom contact'>
-  <input placeholder='联系人' class='addresseeInput '></input>
-  <input placeholder='手机号' class="phoneNumInput"></input>
+  <input placeholder='联系人' 
+         class='addresseeInput' 
+         bindinput="addresseeInputFn"></input>
+  <input placeholder='{{phonePlaceholder}}'
+         class="phoneNumInput" 
+         bindinput="phoneInputFn"
+         type="number" 
+         maxlength="11"
+         value="{{phoneNum}}"
+         placeholder-class="{{phonePlaceholderClass}}"></input>
 </view>
-<button bindtap='back'>back</button>
+<view class='sexBox'>
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{sexRadio}}" wx:key="{{item.value}}">
+      <radio value="{{item.name}}" checked="{{item.checked}}" color="#FF7F50" class="radioDot" />{{item.value}}
+    </label>
+  </radio-group>
+</view>
+<view class='savePosi' bindtap='switchChange'>
+  <switch type="checkbox" checked="{{isSavePos}}"/>
+  <text class='checkbox'>保存到地址簿</text>
+</view>
+<button bindtap='back'class="backBtn" disabled="{{!btnClick}}">确认</button>

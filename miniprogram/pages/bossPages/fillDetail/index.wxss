@@ -12,8 +12,8 @@ page{
 .addresseeInput,
 .phoneNumInput,
 .detailInput {
-  line-height: 120rpx;
-  height: 120rpx;
+  line-height: 100rpx;
+  height: 100rpx;
   font-size: 16px;
 }
 .addresseeInput {
@@ -30,6 +30,33 @@ page{
 }
 .border-bottom {
   border-bottom: 1px solid #eee;
-  line-height: 120rpx;
-  height: 120rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+.sexBox {
+  font-size: 16px;
+  line-height: 30px;
+  color: #666;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.radio {
+  margin-right: 10px;
+}
+.checkbox {
+  line-height: 50px;
+  font-size: 16px;
+  color: #666;
+  height: 50px;
+}
+.backBtn {
+  width: 100%;
+  background: 	#FF7F50;
+  color: #fff;
+}
+.inputWarn {
+  color: red;
+}
+.backBtn {
+  margin-top: 30px;
 }

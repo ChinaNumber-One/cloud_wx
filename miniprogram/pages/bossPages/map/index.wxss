@@ -14,8 +14,9 @@ page {
 }
 .tabBox {
   width: 90%;
-  height: 400rpx;
+  /* height: 480rpx; */
   margin: 10px auto;
+  margin-top: -10px;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
@@ -23,6 +24,8 @@ page {
   box-shadow: 0px 0px 15px 3px #ccc;
   box-sizing: border-box;
   padding: 0 0px 14px;
+  z-index: 1000;
+  background: #fff;
 }
 .bar {
   display: flex;
@@ -40,19 +43,14 @@ page {
 .activeBar {
   border-bottom: 3px solid #ffbf1c;
 }
-.input {
-  border-bottom: 1px solid #eee;
-  padding: 5px 0;
-  font-size: 16px;
-  flex: 1;
-  color: #666;
-}
+
 .inputBox {
   margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
 }
 .inputBox, .sendThingskinds {
-  position: relative;
-  padding:0 20px;
+  /* position: relative; */
+  padding:0 10px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -60,12 +58,20 @@ page {
   align-items: center;
 }
 .dot {
-  position: absolute;
+  /* position: absolute; */
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  left: 7px;
-  top: 15px;
+  margin-right: 10px;
+  /* left: 7px;
+  top: 15px; */
+}
+.input {
+  
+  padding: 5px 0;
+  font-size: 16px;
+  flex: 1;
+  color: #666;
 }
 .sendThingskinds{
   font-size: 14px;
@@ -83,4 +89,8 @@ page {
 }
 .sendThingskindsText {
   flex: 1;
+}
+.addresseeBookBtn {
+  font-size: 14px;
+  color: 	#1E90FF;
 }

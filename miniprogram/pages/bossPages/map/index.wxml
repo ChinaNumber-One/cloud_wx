@@ -21,13 +21,36 @@
           bindtap='changeTypes'>帮我买</view>
   </view>
   <view class='sendThings' wx:if="{{types==='send'}}">
-    <view class='inputBox' data-locationtype='from' bindtap='choiceLoaction'>
-      <text class="input">{{fromLoaction.name}}</text>
+    <view class='inputBox' >
       <view class='dot' style="background:#93d99d;"></view>
+      <view class="input" data-locationtype='from' bindtap='choiceLoaction'>
+        <view >
+          <text wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</text>
+          <text wx:if="{{fromLoaction.addressDetail}}">{{fromLoaction.addressDetail}}</text>
+        </view>
+        <view >
+          <text wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</text>
+          <text wx:if="{{fromLoaction.phoneNum}}">{{fromLoaction.phoneNum}}</text></view>
+      </view>
+      <view class='addresseeBookBtn' data-locationtype='from' bindtap='choiceAddressBook'>
+        地址簿
+      </view>
     </view>
-    <view class='inputBox' data-locationtype='to' bindtap='choiceLoaction'>
-      <text class="input">{{toLoaction.name}}</text>
+    <view class='inputBox' >
       <view class='dot' style="background:#ec8b89;"></view>
+      <view class="input" data-locationtype='to' bindtap='choiceLoaction'>
+        <view >
+          <text wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
+          <text wx:if="{{toLoaction.addressDetail}}">{{toLoaction.addressDetail}}</text>
+        </view>
+        <view >
+          <text wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
+          <text wx:if="{{toLoaction.phoneNum}}">{{toLoaction.phoneNum}}</text>
+        </view>
+      </view>
+      <view class='addresseeBookBtn' data-locationtype='to' bindtap='choiceAddressBook'>
+        地址簿
+      </view>
     </view>
     <view class='sendThingskinds'>
       <view class='dot' style="background:rgba(53,53,53,0.6);border-radius:0;"></view>

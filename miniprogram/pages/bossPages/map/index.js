@@ -1,7 +1,5 @@
 // miniprogram/pages/map/index.js
 const app = getApp()
-// var QQMapWX = require('../../../lib/qqmap-wx-jssdk1.0/qqmap-wx-jssdk.min.js');
-// var qqmapsdk;
 Page({
 
   /**
@@ -13,18 +11,25 @@ Page({
     longitude: null,
     types: 'send',
     fromLoaction: {
-      name: '从哪里出发',
+      addressName: '从哪里出发',
       address: '从哪里出发',
       latitude: null,
-      longitude: null
+      longitude: null,
+      addressDetail: null,
+      addresseeName: null,
+      phoneNum: null
     },
     toLoaction: {
-      name: '到哪里去',
+      addressName: '到哪里去',
       address: '到哪里去',
       latitude: null,
-      longitude: null
+      longitude: null,
+      addressDetail: null,
+      addresseeName: null,
+      phoneNum: null
     },
-    locationType: '',
+    lastPageLocationType:null,// 选择完地址后  返回到该页面，记录 type
+    locationType: '', // 即将要选择地址的 type
     sendThingskindsText: '要配送的物品类型、重量',
     markers: [{},{}],
     polyline:[]
@@ -34,22 +39,125 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    console.log(this.data.fromLoaction)
     if (app.globalData.openid) {
       this.setData({
         openid: app.globalData.openid
       })
       this.getlocation()
-      // qqmapsdk = new QQMapWX({
-      //   key: 'M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2'
-      // });
-      
+      if (options.positionType){
+        this.setData({
+          lastPageLocationType: options.positionType
+        })
+      } else {
+        wx.clearStorage()
+      }
     } else {
       wx.navigateTo({
         url: "/pages/index/index",
       })
     }
+    
+    
 
+  },
+  handelStartPos(data){
+    let res = data.data
+    console.log(res)
+    let startMarker = {
+      id: 'from',
+      latitude: res.latitude,
+      longitude: res.longitude,
+      title: res.name,
+      address: res.address,
+      width: 30,
+      height: 30,
+      iconPath: '/images/startPos.png',
+      callout: {
+        display: "ALWAYS",
+        content: res.name,
+        color: "green"
+      }
+    }
+    this.data.markers[0] = startMarker
+   
+
+    this.setData({
+      fromLoaction: {
+        addressName: res.name,
+        address: res.address,
+        latitude: res.latitude,
+        longitude: res.longitude,
+        addressDetail:res.detail,
+        addresseeName:res.addresseeName,
+        phoneNum:res.phoneNum
+      },
+      markers: this.data.markers
+    })
+    console.log(this.data.markers)
+    console.log(this.data.fromLoaction)
+    this.mapCtx.includePoints({
+      points: [{
+        latitude: res.latitude,
+        longitude: res.longitude
+      }, {
+        latitude: this.data.latitude,
+        longitude: this.data.longitude
+      }],
+      padding: [30]
+    })
+    console.log([{
+      latitude: res.latitude,
+      longitude: res.longitude
+    }, {
+      latitude: this.data.latitude,
+      longitude: this.data.longitude
+    }])
+    this.bicyclingLine()
+  },
+  handelEndPos(data){
+    let res = data.data
+    // 选择  到达地点
+    let endMarkder = {
+      id: 'to',
+      latitude: res.latitude,
+      longitude: res.longitude,
+      title: res.name,
+      address: res.address,
+      width: 30,
+      height: 30,
+      iconPath: '/images/endPos.png',
+      callout: {
+        display: "ALWAYS",
+        content: res.name,
+        color: "red"
+      }
+    }
+    this.data.markers[1] = endMarkder
+    this.setData({
+      toLoaction: {
+        addressName: res.name,
+        address: res.address,
+        latitude: res.latitude,
+        longitude: res.longitude,
+        addressDetail: res.detail,
+        addresseeName: res.addresseeName,
+        phoneNum: res.phoneNum
+      },
+      markers: this.data.markers
+    })
+    // this.mapCtx.includePoints({
+    //   points: [{
+    //     latitude: res.latitude,
+    //     longitude: res.longitude
+    //   }, {
+    //       latitude: this.data.latitude,
+    //       longitude: this.data.longitude
+    //     }],
+    //   padding: [30]
+    // })
+    this.bicyclingLine()
+    this.drivingDistance()
   },
   getlocation() {
     wx.getLocation({
@@ -58,12 +166,35 @@ Page({
       success: this.handleGetLocationSucc.bind(this)
     })
   },
-  handleGetLocationSucc(res) {
-    console.log(res)
+  handleGetLocationSucc(res) {   
     this.setData({
       latitude: res.latitude,
       longitude: res.longitude
     })
+    if ( this.data.lastPageLocationType === 'from') {
+      wx.getStorage({
+        key: 'startPosition',
+        success: this.handelStartPos.bind(this),
+        fail: (res) => {
+          console.log(res)
+        }
+      })
+    } else if ( this.data.lastPageLocationType === 'to') {
+      wx.getStorage({
+        key: 'startPosition',
+        success: this.handelStartPos.bind(this),
+        fail: (res) => {
+          console.log(res)
+        }
+      })
+      wx.getStorage({
+        key: 'endPosition',
+        success: this.handelEndPos.bind(this),
+        fail: (res) => {
+          console.log(res)
+        }
+      })
+    }
   },
   // 送/买 ？
   changeTypes(e) {
@@ -75,100 +206,30 @@ Page({
     this.setData({
       locationType: e.currentTarget.dataset.locationtype
     })
-    wx.chooseLocation({
-      success: this.handleChooseLocationSucc.bind(this)
-    })
-  },
-  handleChooseLocationSucc(res) {
-    console.log(res)
-    // 选择 出发地点
-    if (this.data.locationType === 'from') {
-      let startMarker = {
-        id: 'from',
-        latitude: res.latitude,
-        longitude: res.longitude,
-        title: res.name,
-        address: res.address,
-        width: 30,
-        height: 30,
-        iconPath: '/images/startPos.png',
-        callout: {
-          display: "ALWAYS",
-          content: res.name,
-          color: "green"
-        }
-      }
-      this.data.markers[0] = startMarker
-
-      this.setData({
-        fromLoaction: {
-          name: res.name,
-          address: res.address,
-          latitude: res.latitude,
-          longitude: res.longitude
-        },
-        markers:this.data.markers
-      })
-      this.mapCtx.includePoints({
-        points: [{
-          latitude: res.latitude,
-          longitude: res.longitude
-        },{
-            latitude: this.data.latitude,
-            longitude: this.data.longitude
-        }],
-        padding: [30]
-      })
-      this.bicyclingLine()
-      wx.setStorage({
-        key: "startPosition",
-        data: res,
-        success:function(res){
+    if (this.data.locationType === 'to'){
+      wx.getStorage({
+        key: 'startPosition',
+        success: (res)=> {
           wx.navigateTo({
-            url: "/pages/bossPages/fillDetail/index?locationType=from",
+            url: "/pages/bossPages/fillDetail/index?locationType=" + this.data.locationType,
           })
-        }
-      })
-    } else if (this.data.locationType === 'to') {
-      // 选择  到达地点
-      let endMarkder = {
-        id: 'to',
-        latitude: res.latitude,
-        longitude: res.longitude,
-        title: res.name,
-        address: res.address,
-        width: 30,
-        height: 30,
-        iconPath: '/images/endPos.png',
-        callout: {
-          display: "ALWAYS",
-          content: res.name,
-          color: "red"
-        }
-      }
-      this.data.markers[1] = endMarkder
-      this.setData({
-        toLoaction: {
-          name: res.name,
-          address: res.address,
-          latitude: res.latitude,
-          longitude: res.longitude
         },
-        markers: this.data.markers
+        fail:(res)=>{
+          console.log(res)
+          wx.showToast({
+            title: '请先选择出发地点！',
+            icon: 'none',
+            duration: 1500,
+          })
+          return
+        }
       })
-      // this.mapCtx.includePoints({
-      //   points: [{
-      //     latitude: res.latitude,
-      //     longitude: res.longitude
-      //   }, {
-      //       latitude: this.data.latitude,
-      //       longitude: this.data.longitude
-      //     }],
-      //   padding: [30]
-      // })
-      this.bicyclingLine()
-      this.drivingDistance()
+    } else {
+      wx.navigateTo({
+        url: "/pages/bossPages/fillDetail/index?locationType=" + this.data.locationType,
+      })
     }
+    
   },
   drivingDistance(){
     wx.request({
@@ -206,7 +267,6 @@ Page({
           pl.push({ latitude: coors[i], longitude: coors[i + 1] })
         }
         //设置polyline属性，将路线显示出来
-        console.log(pl)
         _this.mapCtx.includePoints({
           points:pl,
           padding:[30]
@@ -223,29 +283,22 @@ Page({
     };
     wx.request(opt);
   },
+  choiceAddressBook(e){
+    console.log(e.currentTarget.dataset.locationtype)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.mapCtx = wx.createMapContext('map', this)
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // qqmapsdk.search({
-    //   keyword: '酒店',
-    //   success: function (res) {
-    //     console.log(res);
-    //   },
-    //   fail: function (res) {
-    //     console.log(res);
-    //   },
-    //   complete: function (res) {
-    //     console.log(res);
-    //   }
-    // })
+    this.getlocation()
+    this.mapCtx = wx.createMapContext('map', this)
   },
 
   /**
