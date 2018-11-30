@@ -55,6 +55,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中……',
+      mask:true
+    })
     const db = wx.cloud.database()
     db.collection('addressBook').where({
       _openid: app.globalData.openid
@@ -63,10 +67,12 @@ Page({
         this.setData({
           addressList:res.data
         })
+        wx.hideLoading()
         console.log(this.data.addressList)
         console.log('[数据库] [查询记录] 成功: ', res)
       },
       fail: err => {
+        wx.hideLoading()
         wx.showToast({
           icon: 'none',
           title: '查询记录失败'

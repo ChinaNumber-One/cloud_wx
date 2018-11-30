@@ -1,0 +1,17 @@
+<view class="list">
+  <view wx:for="{{types}}" 
+        wx:key="index"  
+        class="item {{choice===item?'activeType':''}}"
+        data-type="{{item}}"
+        bindtap='choiceType'>{{item}}</view>
+</view>
+<view class='weight'>
+  <view class='title'>重量</view>
+  <view class='weightNum'>{{weightNum}}公斤</view>
+  <view class='sliderBox'>
+    <slider bindchange="sliderChange" bindchanging="sliderChange" min="5" max="20" activeColor="#FF7F50"/>
+  </view>
+</view>
+<view style="width:100%;">
+  <button bindtap='submit'class="backBtn" >确定</button>
+</view>

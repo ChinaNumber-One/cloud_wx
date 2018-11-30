@@ -52,9 +52,9 @@
         地址簿
       </view>
     </view>
-    <view class='sendThingskinds'>
+    <view class='sendThingskinds' bindtap='choiceThingsType'>
       <view class='dot' style="background:rgba(53,53,53,0.6);border-radius:0;"></view>
-      <text class='sendThingskindsText'>{{sendThingskindsText}}</text>
+      <text class='sendThingskindsText {{warn}}'>{{sendThingskindsText}}</text>
       <text class='iconfont icon-you' ></text>
     </view>
   </view>

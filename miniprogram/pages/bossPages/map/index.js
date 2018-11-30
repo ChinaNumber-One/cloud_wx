@@ -9,6 +9,7 @@ Page({
     openid: null,
     latitude: null,
     longitude: null,
+    warn:'',
     types: 'send',
     fromLoaction: {
       addressName: '从哪里出发',
@@ -145,7 +146,8 @@ Page({
         addresseeName: res.addresseeName,
         phoneNum: res.phoneNum
       },
-      markers: this.data.markers
+      markers: this.data.markers,
+      warn:'warnColor',
     })
     // this.mapCtx.includePoints({
     //   points: [{
@@ -159,6 +161,11 @@ Page({
     // })
     this.bicyclingLine()
     this.drivingDistance()
+  },
+  choiceThingsType(){
+    wx.navigateTo({
+      url: "/pages/bossPages/sendThingsType/index",
+    })
   },
   getlocation() {
     wx.getLocation({

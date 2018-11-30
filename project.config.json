@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -47,6 +47,12 @@
 					"name": "fillDetail",
 					"pathName": "pages/bossPages/fillDetail/index",
 					"query": "locationType=from"
+				},
+				{
+					"id": -1,
+					"name": "thingsType",
+					"pathName": "pages/bossPages/sendThingsType/index",
+					"query": ""
 				}
 			]
 		}
