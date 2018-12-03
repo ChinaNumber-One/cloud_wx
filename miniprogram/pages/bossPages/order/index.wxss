@@ -1,1 +1,119 @@
 /* miniprogram/pages/bossPages/order/index.wxss */
+.page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.map{
+  /* height: 200px; */
+  width: 100%;
+  flex: 1;
+}
+.info {
+  /* height: 253px; */
+}
+.sendThingskinds, .remarks, .tips {
+
+  position: relative;
+  padding:0 10px;
+  width: 90%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  margin: 5px auto;
+  color: #666;
+  background: #fff;
+  height: 100rpx;
+  font-size: 14px;
+  text-align: left;
+}
+.addressBox {
+  padding:0 10px;
+  width: 90%;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+  margin: 10px auto;
+  color: #666;
+  background: #fff;
+  font-size: 16px;
+  text-align: left;
+}
+.address {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dot {
+  /* position: absolute; */
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+  /* left: 7px;
+  top: 15px; */
+}
+.page {
+  background: #f7f7f7;
+  width: 100%; 
+}
+.addresseeBookBtn {
+  width: 60px;
+  text-align: center;
+  font-size: 14px;
+  color: 	#1E90FF;
+}
+.midelText {
+  flex: 1;
+  text-align: left;
+  padding: 5px 0;
+}
+.flex {
+  display: flex;
+}
+.tips {
+  margin-top: 0;
+  border-top: none;
+}
+.remarks {
+  margin-bottom: 0;
+}
+.iconyou {
+  position: absolute;
+  right: 20px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.bottom {
+  height: 128rpx;
+  background: #fff;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.bottom_l {
+  line-height: 128rpx;
+  font-size: 14px;
+  flex: 1;
+}
+.priceNum {
+  font-size: 22px;
+  margin:0 4px;
+}
+.priceIcon, .priceNum {
+  color: red;
+}
+.submit {
+  width: 40%;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-top: 20rpx;
+  background:	#FF7F50;
+  color: #fff;
+}
+.wordwarp {
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

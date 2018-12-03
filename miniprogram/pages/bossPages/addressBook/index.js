@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    page:'',
     addressList:null,
     locationType:null
   },
@@ -14,6 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.page === 'order') {
+      this.setData({
+        page:options.page
+      })
+    }
     if (options.locationType) {
       this.setData({
         locationType: options.locationType
@@ -37,9 +43,16 @@ Page({
         key: key,
         data: data,
         success:(res)=>{
-          wx.navigateTo({
-            url: "/pages/bossPages/map/index?positionType=" + this.data.locationType,
-          })
+          if(this.data.page === 'order'){
+            wx.navigateTo({
+              url: "/pages/bossPages/order/index"
+            })
+          } else {
+            wx.navigateTo({
+              url: "/pages/bossPages/map/index?positionType=" + this.data.locationType,
+            })
+          }
+          
         }
       })
     // }

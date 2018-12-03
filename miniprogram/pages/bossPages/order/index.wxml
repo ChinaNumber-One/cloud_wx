@@ -1,2 +1,60 @@
-<!--miniprogram/pages/bossPages/order/index.wxml-->
-<text>miniprogram/pages/bossPages/order/index.wxml</text>
+<view class='page' style="height:{{windowHeight}}px">
+  <map id="map" show-location='true' markers="{{markers}}" bindmarkertap="handleMarkerTap" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" scale="18" class="map" subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2"></map>
+  <view class='info'>
+    <view class='sendThingskinds' bindtap='choiceThingsType'>
+      <view class='dot' style="background:rgba(53,53,53,0.6);border-radius:0;"></view>
+      <text class='sendThingskindsText {{warn}}'>{{sendThingskindsText}}</text>
+      <view class='iconfont icon-you iconyou' ></view>
+    </view>
+    <view class='addressBox'>
+      <view class='address' style="border-bottom:1px solid #eee;">
+        <view class='dot' style="background:#93d99d;"></view>
+        <view class="midelText" data-locationtype='from' bindtap='choiceLoaction'>
+          <view class="flex" style="color:#333;">
+            <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</view>
+            <view class="wordwarp" wx:if="{{fromLoaction.addressDetail}}">{{fromLoaction.addressDetail}}</view>
+          </view>
+          <view class="flex" style="font-size:14px;">
+            <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</view>
+            <view class="wordwarp" wx:if="{{fromLoaction.phoneNum}}">{{fromLoaction.phoneNum}}</view>
+          </view>
+        </view>
+        <view class='addresseeBookBtn' data-locationtype='from' bindtap='choiceAddressBook'>
+          地址簿
+        </view>
+      </view>
+      <view class='address'>
+        <view class='dot' style="background:#ec8b89;"></view>
+        <view class="midelText" data-locationtype='to' bindtap='choiceLoaction'>
+          <view class="flex" style="color:#333;">
+            <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
+            <text class="wordwarp" wx:if="{{toLoaction.addressDetail}}">{{toLoaction.addressDetail}}</text>
+          </view>
+          <view class="flex" style="font-size:14px;">
+            <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
+            <text class="wordwarp" wx:if="{{toLoaction.phoneNum}}">{{toLoaction.phoneNum}}</text>
+          </view>
+        </view>
+        <view class='addresseeBookBtn' data-locationtype='to' bindtap='choiceAddressBook'>
+          地址簿
+        </view>
+      </view>
+    </view>
+    <view class='remarks'>
+      <text style="color:#333;width:44px;">备注：</text>
+      <input placeholder='物品描述或者送件要求' bindinput='remarkChange' style='flex:1'></input>
+    </view>
+
+    <view class='tips'>
+      <text style="color:#333;width:44px;">小费：</text>
+      <input placeholder='加小费抢单更快哦！单位（元）' type='number' bindinput="tipChange" style='flex:1'></input>
+    </view>
+  </view>
+  <view class='bottom'>
+    <view class="bottom_l">
+      总价：<text class="priceIcon">¥</text><text class="priceNum">{{totalPrice+tip}}</text>
+      <text class='iconfont icon-you' ></text>
+    </view>
+    <button class='submit' bindtap='submit'>提交订单</button>
+  </view>
+</view>

@@ -77,7 +77,11 @@ Page({
       callout: {
         display: "ALWAYS",
         content: res.name,
-        color: "green"
+        borderRadius: 4,
+        bgColor: '#666',
+        color: '#fff',
+        padding: 4,
+        textAlign: 'center'
       }
     }
     this.data.markers[0] = startMarker
@@ -132,7 +136,11 @@ Page({
       callout: {
         display: "ALWAYS",
         content: res.name,
-        color: "red"
+        borderRadius: 4,
+        bgColor: '#666',
+        color: '#fff',
+        padding: 4,
+        textAlign: 'center'
       }
     }
     this.data.markers[1] = endMarkder
@@ -160,7 +168,6 @@ Page({
     //   padding: [30]
     // })
     this.bicyclingLine()
-    this.drivingDistance()
   },
   choiceThingsType(){
     wx.navigateTo({
@@ -236,21 +243,6 @@ Page({
       wx.navigateTo({
         url: "/pages/bossPages/fillDetail/index?locationType=" + this.data.locationType,
       })
-    }
-    
-  },
-  drivingDistance(){
-    console.log('打')
-    wx.request({
-      url: 'https://apis.map.qq.com/ws/distance/v1/?mode=driving&from=' + this.data.fromLoaction.latitude + ',' + this.data.fromLoaction.longitude + '&to=' + this.data.toLoaction.latitude + ',' + this.data.toLoaction.longitude + '&key=M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2',
-      success: this.getdrivingDistanceSuccess.bind(this)
-    })
-  },
-  getdrivingDistanceSuccess(res){
-    console.log(res)
-    if (res.statusCode === 200){
-      console.log(res.data.result.elements[0].distance+'米')
-      console.log(res.data.result.elements[0].duration+'秒')
     }
     
   },

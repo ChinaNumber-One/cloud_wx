@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    page:'',
     StorageKey:'',
     storagePos:{},
     locationType:'',
@@ -196,9 +197,19 @@ Page({
       key: key,
       data: finalInfo,
       success: () => {
-        wx.navigateTo({
-          url: "/pages/bossPages/map/index?positionType=" + this.data.locationType,
-        })
+        console.log('即将返回页面')
+        if(this.data.page === 'order') {
+          wx.navigateTo({
+            url: '/pages/bossPages/order/index',
+          })
+        } else {
+          wx.navigateTo({
+            url: "/pages/bossPages/map/index?positionType=" + this.data.locationType,
+          })
+        }
+        
+
+
         // wx.navigateBack({
         //   delta: 1
         // })
@@ -223,6 +234,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    if(options.page){
+      this.setData({
+        page:options.page
+      })
+    }
     if (options.locationType){
       let key = options.locationType === 'from' ? 'startPosition' : 'endPosition'
       this.setData({
