@@ -9,7 +9,11 @@
        polyline="{{polyline}}" 
        scale="18" 
        class="map" 
-       subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2" ></map> 
+       subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2" >
+    <!-- <cover-view> -->
+      <cover-image src='/images/location.png' class="locationIcon" bindtap='moveToLocation'/>
+    <!-- </cover-view>      -->
+  </map> 
 </view>
 <view class='tabBox'>
   <view class='bar'>

@@ -417,6 +417,9 @@ Page({
       tip: Number(e.detail.value)
     })
   },
+  moveToLocation() {
+    this.mapCtx.moveToLocation();
+  },
   submit(){
     this.createCode()
     const db = wx.cloud.database()
@@ -433,9 +436,10 @@ Page({
           tip:this.data.tip,
           remark:this.data.remarkText,
           code:this.data.code,
-          orderCreateTime: new Date().getFullYear() + '-' + ((new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '-' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + ' ' + (new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()) + ':' + (new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()) + ':' + (new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()),
-          orderCreateId: app.globalData.openid + new Date().getTime()
-        }
+        },
+        state:0,
+        orderCreateTime: new Date().getFullYear() + '-' + ((new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '-' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + ' ' + (new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()) + ':' + (new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()) + ':' + (new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()),
+        orderCreateId: app.globalData.openid + new Date().getTime()
       },
       success: res => {
         console.log(res)

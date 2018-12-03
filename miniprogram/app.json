@@ -7,7 +7,8 @@
     "pages/bossPages/fillDetail/index",
     "pages/bossPages/addressBook/index",
     "pages/bossPages/sendThingsType/index",
-    "pages/bossPages/order/index"
+    "pages/bossPages/order/index",
+    "pages/bindPhone/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -1,5 +1,7 @@
 <view class='page' style="height:{{windowHeight}}px">
-  <map id="map" show-location='true' markers="{{markers}}" bindmarkertap="handleMarkerTap" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" scale="18" class="map" subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2"></map>
+  <map id="map" show-location='true' markers="{{markers}}" bindmarkertap="handleMarkerTap" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" scale="18" class="map" subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2">
+    <cover-image src='/images/location.png' class="locationIcon" bindtap='moveToLocation'/>
+  </map>
   <view class='info'>
     <view class='sendThingskinds' bindtap='choiceThingsType'>
       <view class='dot' style="background:rgba(53,53,53,0.6);border-radius:0;"></view>

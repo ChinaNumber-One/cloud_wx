@@ -290,11 +290,14 @@ Page({
       url: "/pages/bossPages/addressBook/index?locationType=" + e.currentTarget.dataset.locationtype,
     })
   },
+  moveToLocation(){
+    this.mapCtx.moveToLocation();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.mapCtx = wx.createMapContext('map', this)
   },
 
   /**
@@ -302,7 +305,7 @@ Page({
    */
   onShow: function () {
     this.getlocation()
-    this.mapCtx = wx.createMapContext('map', this)
+    
   },
 
   /**

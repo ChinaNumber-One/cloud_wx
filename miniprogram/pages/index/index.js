@@ -22,25 +22,55 @@ Page({
         userInfo: e.detail.userInfo
       })
     }
+    app.globalData.userInfo = this.data.userInfo
+    app.globalData.avatarUrl = this.data.userInfo.avatarUrl
+    app.globalData.logged = this.data.logged
   },
 
   onGetOpenid: function(e) {
+    wx.showLoading({
+      title: '同步用户信息…',
+    })
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
-        if(e.currentTarget.dataset.identity === 'run'){
-          wx.navigateTo({
-            url: '/pages/runPages/list/index',
-          })
-        } else if (e.currentTarget.dataset.identity === 'boss'){
-          wx.navigateTo({
-            url: '/pages/bossPages/map/index',
-          })
-        }
+        const db = wx.cloud.database()
+        // 查询当前用户所有的 counters
+        db.collection('userInfo').where({
+          _openid: res.result.openid
+        }).get({
+          success: res => {
+            wx.hideLoading()
+            // wx.navigateTo({
+            //   url: '/pages/bindPhone/index',
+            // })
+            if(res.data.length===0){
+              wx.navigateTo({
+                url: '/pages/bindPhone/index',
+              })
+            } else {
+              if(res.data[0].isLogin){
+                if (e.currentTarget.dataset.identity === 'run') {
+                  wx.navigateTo({
+                    url: '/pages/runPages/list/index',
+                  })
+                } else if (e.currentTarget.dataset.identity === 'boss') {
+                  wx.navigateTo({
+                    url: '/pages/bossPages/map/index',
+                  })
+                }
+              } else {
+                wx.navigateTo({
+                  url: '/pages/bindPhone/index',
+                })
+              }
+            }
+          }
+        })
+        
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)

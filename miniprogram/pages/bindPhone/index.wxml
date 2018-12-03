@@ -1,0 +1,27 @@
+<view>
+  <view class="userImgBox">
+    <image src='{{avatarUrl}}' class='userImg'></image>
+    <view class='userName' class='nickName'>{{userInfo.nickName||'未知用户'}}</view>
+  </view>
+
+  <view class='phoneBox'>
+    <view class='phoneNum'>
+      <input placeholder='请输入手机号' class="phoneInput"
+        bindblur="phoneInputFn"
+        bindconfirm='phoneInputFn'
+        type="number" 
+        maxlength="11"
+        value="{{phoneNum}}"></input>
+    </view>
+    <view class='codeBox'>
+      <input placeholder='请输入验证码' class="codeInput" value="{{codeInput}}"></input>
+      <button class='codeBtn' bindtap='getCode' disabled='{{getCodeFlag}}'>{{codeBtnText}}</button>
+    </view>
+
+    <button class='submit' bindtap='submit'>确认</button>
+
+    <view class="agreeOn">
+      登录成功即同意<text class="agree">《注册协议》</text>和<text class="agree">《隐私政策》</text>
+    </view>
+  </view>
+</view>

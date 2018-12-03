@@ -32,12 +32,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				},
-				{
-					"id": -1,
 					"name": "map",
 					"pathName": "pages/bossPages/map/index",
 					"query": ""
@@ -58,6 +52,12 @@
 					"id": -1,
 					"name": "thingsType",
 					"pathName": "pages/bossPages/order/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "bindPhone",
+					"pathName": "pages/bindPhone/index",
 					"query": ""
 				}
 			]
