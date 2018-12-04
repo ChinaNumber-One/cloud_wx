@@ -1,2 +1,36 @@
-<!--miniprogram/pages/runPages/list/index.wxml-->
-<text>miniprogram/pages/runPages/list/index.wxml</text>
+<view class="tabBar">
+  <view class="barItem {{index===0?'barItem_active':''}}" bindtap='changeIndex' data-index="0">新任务</view>
+  <view class="barItem {{index===1?'barItem_active':''}}" bindtap='changeIndex' data-index="1">待取货</view>
+  <view class="barItem {{index===2?'barItem_active':''}}" bindtap='changeIndex' data-index="2">配送中</view>
+</view>
+<view class="orderList" wx:if="{{index===0}}">
+  <view wx:if="{{!orderList.length}}" style="line-height:50px;text-align:center;background:#fff;">Sorry,暂无订单可接！</view>
+  <view wx:for="{{orderList}}" wx:key="item._id" class='orderItem'>
+    <view class='item_head'>
+      <view class='arriveDateBox'>
+        <image src='/images/time.png' class='icon'></image>
+        <text class='arriveDate'>{{item.boss.arriveDate}}前</text><text>送达</text>
+      </view>
+      <view class='price'>
+        <text class='priceNum'>{{item.boss.price+item.boss.tip}}</text>元
+      </view>
+    </view>
+
+    <view class="item_content">
+      <view class='item_content_l'>
+        <view class='text'>{{distance[index]}}m</view>
+        <view class='text'>取货</view>
+        <view class="line"></view>
+        <view class='text'>{{item.boss.distance}}km</view>
+        <view class='text'>送货</view>
+      </view>
+      <view class='item_content_r'>
+        <view class="addressName">{{item.boss.startPosition.addressName}}{{item.boss.startPosition.addressDetail}}</view>
+        <view class="address">{{item.boss.startPosition.address}}{{item.boss.startPosition.addressName}}{{item.boss.startPosition.addressDetail}}</view>
+        <view class="addressName" style="margin-top:20px;">{{item.boss.endPosition.addressName}}{{item.boss.endPosition.addressDetail}}</view>
+        <view class="address">{{item.boss.endPosition.address}}{{item.boss.endPosition.addressName}}{{item.boss.endPosition.addressDetail}}</view>
+      </view>
+    </view>
+    <button class="orderReceiving" type='primary' data-id="{{item._id}}" bindtap='orderReceiving'>抢单</button>
+  </view>
+</view>

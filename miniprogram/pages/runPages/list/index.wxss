@@ -1,1 +1,90 @@
-/* miniprogram/pages/runPages/list/index.wxss */
+page {
+  background: #f1f1f1;
+  min-height: 100%;
+}
+.tabBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+}
+.barItem {
+  line-height: 40px;
+  font-size: 16px;
+  padding: 0 12px;
+}
+.barItem_active {
+  border-bottom: 3px solid #000;
+}
+.orderList {
+  padding-top: 10px;
+  background: #f1f1f1;
+
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+.arriveDateBox {
+  display: flex;
+  align-items: center;
+}
+.item_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  line-height: 16px;
+  margin-bottom: 10px;
+}
+.orderItem {
+  padding: 16px;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.arriveDate {
+  color:#FF7F50;
+}
+.price {
+  color: red;
+  font-size: 14px;
+}
+.priceNum {
+  font-size: 22px;
+}
+.item_content {
+  display: flex;
+  font-size: 16px;
+}
+.item_content_l {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  min-height: 158rpx;
+  max-height: 100%;
+}
+.line {
+  flex: 1;
+  width: 1px;
+  background: #999;
+}
+.text {
+  height: 16px;
+  line-height: 16px;
+}
+.item_content_r {
+  margin-left: 10px;
+}
+.addressName {
+  font-weight: 900;
+}
+.address {
+  color: #999;
+  font-size: 14px;
+}
+.orderReceiving {
+  margin-top: 20px;
+}

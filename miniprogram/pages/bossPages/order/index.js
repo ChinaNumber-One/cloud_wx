@@ -421,6 +421,9 @@ Page({
     this.mapCtx.moveToLocation();
   },
   submit(){
+    wx.showLoading({
+      title: '正在下单…',
+    })
     this.createCode()
     const db = wx.cloud.database()
     db.collection('order').add({
@@ -429,7 +432,7 @@ Page({
           arriveDate:this.data.arriveDate,
           distance:this.data.distance,
           startPosition: this.data.fromLoaction,
-          endPositon:this.data.toLoaction,
+          endPosition:this.data.toLoaction,
           sendThingsKind:this.data.sendThingskindsText,
           weight:this.data.weight,
           price:this.data.totalPrice,
@@ -451,13 +454,18 @@ Page({
         // wx.showToast({
         //   title: '新增记录成功',
         // })
+        wx.navigateTo({
+          url: '/pages/index/index',
+        })
         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        wx.hideLoading()
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
           title: '新增记录失败'
         })
+        wx.hideLoading()
         console.error('[数据库] [新增记录] 失败：', err)
       }
     })

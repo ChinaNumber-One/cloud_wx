@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -58,6 +58,12 @@
 					"id": -1,
 					"name": "bindPhone",
 					"pathName": "pages/bindPhone/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "orderlist",
+					"pathName": "pages/runPages/list/index",
 					"query": ""
 				}
 			]
