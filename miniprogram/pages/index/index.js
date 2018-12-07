@@ -11,7 +11,7 @@ Page({
   },
 
   onLoad: function() {
-    
+    console.log(app.globalData.openid)
   },
 
   onGetUserInfo: function(e) {
@@ -49,16 +49,17 @@ Page({
             // })
             if(res.data.length===0){
               wx.navigateTo({
-                url: '/pages/bindPhone/index',
+                url: '/pages/bindPhone/index?identity=' + e.currentTarget.dataset.identity,
               })
             } else {
               if(res.data[0].isLogin){
+                console.log(e.currentTarget.dataset.identity)
                 if (e.currentTarget.dataset.identity === 'run') {
-                  wx.navigateTo({
+                  wx.switchTab({
                     url: '/pages/runPages/list/index',
                   })
                 } else if (e.currentTarget.dataset.identity === 'boss') {
-                  wx.navigateTo({
+                  wx.reLaunch({
                     url: '/pages/bossPages/map/index',
                   })
                 }

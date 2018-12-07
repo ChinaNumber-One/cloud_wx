@@ -21,14 +21,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.identity){
+      this.setData({
+        identity: options.identity
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.showModal({
+      title: '温馨提示',
+      content: '由于暂未开通线上支付功能，请使用同支付宝手机号登录，用于收付款！',
+      showCancel:false,
+      confirmText:'知道了'
+    })
   },
 
   /**
@@ -142,15 +151,14 @@ Page({
     }
     wx.showModal({
       title: '验证码',
-      content: '【安全登录】尊敬的'+this.data.userInfo.nickName+'，您好！您本次的验证码是'+code+'，请妥善保管（奔跑侠）。',
+      content: '【安全登录】尊敬的'+this.data.userInfo.nickName+'，您好！您本次的验证码是'+code+'，请妥善保管（奔跑侠）。(开发版本节省短信验证码接口次数使用弹框形式)',
+      showCancel:false,
+      confirmText:'填入',
       success:(res)=>{
         if(res.confirm){
           this.setData({
             codeInput:code
           })
-          this.saveUserInfo(code)
-        }else if(res.cancel) {
-          this.saveUserInfo(code)
         }
       }
     })
@@ -212,7 +220,23 @@ Page({
               loginTime: this.formatterDateTime()
             },
             success: res => {
-              
+              wx.hideLoading()
+              wx.showToast({
+                title: '登录成功',
+                icon: 'success',
+                duration: 2000,
+                complete: (res) => {
+                  if(this.data.identity === 'boss'){
+                    wx.navigateTo({
+                      url: '/pages/bossPages/map/index',
+                    })
+                  } else if(this.data.identity === 'run') {
+                    wx.navigateTo({
+                      url: "/pages/runPages/list/index",
+                    })
+                  }
+                }
+              })
             },
             fail: err => {
               wx.showToast({
@@ -236,8 +260,22 @@ Page({
               loginTime: this.formatterDateTime()
             },
             success: res => {
-              this.setData({
-                count: newCount
+              wx.hideLoading()
+              wx.showToast({
+                title: '登录成功',
+                icon: 'success',
+                duration: 2000,
+                complete: (res) => {
+                  if (this.data.identity === 'boss') {
+                    wx.navigateTo({
+                      url: '/pages/bossPages/map/index',
+                    })
+                  } else if (this.data.identity === 'run') {
+                    wx.navigateTo({
+                      url: "/pages/runPages/list/index",
+                    })
+                  }
+                }
               })
             },
           })
@@ -246,28 +284,10 @@ Page({
     })
   },
   submit(){
-    const db = wx.cloud.database()
-    // 查询当前用户所有的 counters
-    db.collection('userInfo').where({
-      _openid: this.data.openid
-    }).get({
-      success: res => {
-        console.log(res)
-        if(res.data[0].code === this.data.codeInput && res.data[0].isLogin){
-          wx.showToast({
-            title: '登录成功',
-            icon:'success',
-            duration:2000,
-            complete:(res)=>{
-              wx.navigateTo({
-                url: '/pages/bossPages/map/index',
-              })
-            }
-          })
-        }
-        
-      }
+    wx.showLoading({
+      title: '正在登录…',
     })
+    this.saveUserInfo(this.data.codeInput)
   }
 
 })

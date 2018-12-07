@@ -7,12 +7,12 @@ App({
     } else {
       wx.cloud.init({
         traceUser: true,
-        env:'text-58c2a3',
+        env:'ittalkshow-58c2a3',
       })
     }
 
     this.globalData = {
-      openid:'o7k1V43zYHPTMWF3Y2Kq0Tpe6HhY'
+      // openid:'o7k1V43zYHPTMWF3Y2Kq0Tpe6HhY'
     }
   }
 })

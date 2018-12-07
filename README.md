@@ -10,3 +10,9 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
+订单状态  state   
+  0 : 未接单 
+  1 : 接单 待取货
+  2 : 配送中
+  3 : 完成订单
+        

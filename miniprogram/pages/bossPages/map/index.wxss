@@ -15,6 +15,7 @@ page {
 }
 .tabBox {
   width: 90%;
+  min-height: 380rpx;
   /* height: 480rpx; */
   margin: 10px auto;
   border-right: 1px solid #eee;

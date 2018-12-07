@@ -1,0 +1,15 @@
+<view class='claimGood' wx:if="{{index===1}}">
+  <!-- <map id="map" 
+       wx:if="claimGood!==null"
+       show-location='{{showLocation}}' 
+       markers="{{markers}}" 
+       bindmarkertap="handleMarkerTap" 
+       longitude="{{longitude}}" 
+       latitude="{{latitude}}"
+       polyline="{{polyline}}" 
+       scale="18" 
+       class="map" 
+       subkey="M7JBZ-3TSKJ-U3FFV-KVSPJ-LKHE6-QTFJ2" >
+    <cover-image src='/images/location.png' class="locationIcon" bindtap='moveToLocation'/>
+  </map> -->
+</view>

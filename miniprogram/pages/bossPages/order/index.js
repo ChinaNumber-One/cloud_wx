@@ -425,50 +425,82 @@ Page({
       title: '正在下单…',
     })
     this.createCode()
+    
     const db = wx.cloud.database()
-    db.collection('order').add({
-      data: {
-        boss:{
-          arriveDate:this.data.arriveDate,
-          distance:this.data.distance,
-          startPosition: this.data.fromLoaction,
-          endPosition:this.data.toLoaction,
-          sendThingsKind:this.data.sendThingskindsText,
-          weight:this.data.weight,
-          price:this.data.totalPrice,
-          tip:this.data.tip,
-          remark:this.data.remarkText,
-          code:this.data.code,
-        },
-        state:0,
-        orderCreateTime: new Date().getFullYear() + '-' + ((new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '-' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + ' ' + (new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()) + ':' + (new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()) + ':' + (new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()),
-        orderCreateId: app.globalData.openid + new Date().getTime()
-      },
-      success: res => {
+    db.collection('userInfo').where({
+      _openid:app.globalData.openid
+    }).get({
+      success:(res)=>{
         console.log(res)
-        // 在返回结果中会包含新创建的记录的 _id
-        // this.setData({
-        //   counterId: res._id,
-        //   count: 1
-        // })
-        // wx.showToast({
-        //   title: '新增记录成功',
-        // })
-        wx.navigateTo({
-          url: '/pages/index/index',
+        wx.cloud.callFunction({
+          name: 'createOrder',
+          data: {
+            bossOpenid: app.globalData.openid,
+            arriveDate: this.data.arriveDate,
+            distance: this.data.distance,
+            startPosition: this.data.fromLoaction,
+            endPosition: this.data.toLoaction,
+            sendThingsKind: this.data.sendThingskindsText,
+            weight: this.data.weight,
+            price: this.data.totalPrice,
+            tip: this.data.tip,
+            remark: this.data.remarkText,
+            code: this.data.code,
+            bossPhoneNum: res.data[0].phoneNum,
+            bossLatitude: this.data.latitude,
+            bossLongitude: this.data.longitude,
+          }, success: function (res) {
+            console.log(res)
+            wx.hideLoading()
+            if (res.result.errMsg === "collection.add:ok"){
+              wx.navigateTo({
+                url: '/pages/index/index',
+              })
+            }
+          }, fail: function (res) {
+            console.log(res)
+          }
         })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
-        wx.hideLoading()
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '新增记录失败'
-        })
-        wx.hideLoading()
-        console.error('[数据库] [新增记录] 失败：', err)
+        // db.collection('order').add({
+        //   data: {
+        //     boss: {
+        //       openid:app.globalData.openid,
+        //       arriveDate: this.data.arriveDate,
+        //       distance: this.data.distance,
+        //       startPosition: this.data.fromLoaction,
+        //       endPosition: this.data.toLoaction,
+        //       sendThingsKind: this.data.sendThingskindsText,
+        //       weight: this.data.weight,
+        //       price: this.data.totalPrice,
+        //       tip: this.data.tip,
+        //       remark: this.data.remarkText,
+        //       code: this.data.code,
+        //       phoneNum: res.data[0].phoneNum
+        //     },
+        //     runOpenid:'',
+        //     state: 0,
+        //     orderCreateTime: new Date().getFullYear() + '-' + ((new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '-' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + ' ' + (new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()) + ':' + (new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()) + ':' + (new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()),
+        //     orderCreateId: app.globalData.openid + new Date().getTime()
+        //   },
+        //   success: res => {
+        //     wx.navigateTo({
+        //       url: '/pages/index/index',
+        //     })
+        //     console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        //     wx.hideLoading()
+        //   },
+        //   fail: err => {
+        //     wx.showToast({
+        //       icon: 'none',
+        //       title: '下单失败请重试！'
+        //     })
+        //     wx.hideLoading()
+        //     console.error('[数据库] [新增记录] 失败：', err)
+        //   }
+        // })
       }
     })
+    
   },
   createCode(){
     let code='';

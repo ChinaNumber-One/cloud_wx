@@ -1,18 +1,16 @@
-<view class="tabBar">
-  <view class="barItem {{index===0?'barItem_active':''}}" bindtap='changeIndex' data-index="0">新任务</view>
-  <view class="barItem {{index===1?'barItem_active':''}}" bindtap='changeIndex' data-index="1">待取货</view>
-  <view class="barItem {{index===2?'barItem_active':''}}" bindtap='changeIndex' data-index="2">配送中</view>
-</view>
 <view class="orderList" wx:if="{{index===0}}">
-  <view wx:if="{{!orderList.length}}" style="line-height:50px;text-align:center;background:#fff;">Sorry,暂无订单可接！</view>
+  <view wx:if="{{orderList.length===0}}" style="line-height:50px;text-align:center;background:#fff;">Sorry,暂无订单可接！</view>
   <view wx:for="{{orderList}}" wx:key="item._id" class='orderItem'>
     <view class='item_head'>
       <view class='arriveDateBox'>
         <image src='/images/time.png' class='icon'></image>
-        <text class='arriveDate'>{{item.boss.arriveDate}}前</text><text>送达</text>
+        <text class='arriveDate'>{{item.arriveDate}}前</text><text>送达</text>
+      </view>
+      <view class="things">
+        {{item.sendThingsKind}}
       </view>
       <view class='price'>
-        <text class='priceNum'>{{item.boss.price+item.boss.tip}}</text>元
+        <text class='priceNum'>{{item.price+item.tip}}</text>元
       </view>
     </view>
 
@@ -21,16 +19,23 @@
         <view class='text'>{{distance[index]}}m</view>
         <view class='text'>取货</view>
         <view class="line"></view>
-        <view class='text'>{{item.boss.distance}}km</view>
+        <view class='text'>{{item.distance}}km</view>
         <view class='text'>送货</view>
       </view>
       <view class='item_content_r'>
-        <view class="addressName">{{item.boss.startPosition.addressName}}{{item.boss.startPosition.addressDetail}}</view>
-        <view class="address">{{item.boss.startPosition.address}}{{item.boss.startPosition.addressName}}{{item.boss.startPosition.addressDetail}}</view>
-        <view class="addressName" style="margin-top:20px;">{{item.boss.endPosition.addressName}}{{item.boss.endPosition.addressDetail}}</view>
-        <view class="address">{{item.boss.endPosition.address}}{{item.boss.endPosition.addressName}}{{item.boss.endPosition.addressDetail}}</view>
+        <view class="addressName">{{item.startPosition.addressName}}{{item.startPosition.addressDetail}}</view>
+        <view class="address">{{item.startPosition.address}}</view>
+        <view class="addressName" style="margin-top:20px;">{{item.endPosition.addressName}}{{item.endPosition.addressDetail}}</view>
+        <view class="address">{{item.endPosition.address}}</view>
       </view>
     </view>
-    <button class="orderReceiving" type='primary' data-id="{{item._id}}" bindtap='orderReceiving'>抢单</button>
+    <button class="orderReceiving" type='primary' data-id="{{item._id}}" data-ordercreateid="{{item.orderCreateId}}" bindtap='orderReceiving'>抢单</button>
   </view>
 </view>
+<view  class='bottom' bindtap='getOrderList'>
+  <view class="refreshBox">
+    <image src='/images/refresh.png' class='refreshIcon'></image>
+    <view class='refreshText'>刷新列表</view>
+  </view>
+</view>
+
