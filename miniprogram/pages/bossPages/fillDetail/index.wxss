@@ -3,7 +3,7 @@ page{
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 10px;
+  padding: 20rpx;
   box-sizing: border-box;
 }
 .position {
@@ -14,7 +14,7 @@ page{
 .detailInput {
   line-height: 100rpx;
   height: 100rpx;
-  font-size: 16px;
+  font-size: 32rpx;
 }
 .addresseeInput {
   width: 40%;
@@ -22,7 +22,7 @@ page{
 }
 .phoneNumInput {
   width: 60%;
-  padding-left: 10px;
+  padding-left: 20rpx;
 }
 .contact {
   display: flex;
@@ -34,29 +34,30 @@ page{
   height: 100rpx;
 }
 .sexBox {
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 32rpx;
+  line-height: 60rpx;
   color: #666;
-  padding: 10px 0;
+  padding: 20rpx 0;
   border-bottom: 1px solid #eee;
 }
 .radio {
-  margin-right: 10px;
+  margin-right: 20rpx;
 }
 .checkbox {
-  line-height: 50px;
-  font-size: 16px;
+  line-height: 100rpx;
+  font-size: 32rpx;
   color: #666;
-  height: 50px;
+  height: 100rpx;
 }
 .backBtn {
   width: 100%;
   background: 	#FF7F50;
   color: #fff;
+  margin-top: 60rpx;
+  font-size: 40rpx;
+  height: 92rpx;
+  line-height: 92rpx;
 }
 .inputWarn {
   color: red;
-}
-.backBtn {
-  margin-top: 30px;
 }

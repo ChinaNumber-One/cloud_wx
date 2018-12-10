@@ -13,11 +13,11 @@
         <view class='dot' style="background:#93d99d;"></view>
         <view class="midelText" data-locationtype='from' bindtap='choiceLoaction'>
           <view class="flex" style="color:#333;">
-            <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</view>
+            <view class="wordwarp" style="margin-right:8rpx;" wx:if="{{fromLoaction.addressName}}">{{fromLoaction.addressName}}</view>
             <view class="wordwarp" wx:if="{{fromLoaction.addressDetail}}">{{fromLoaction.addressDetail}}</view>
           </view>
-          <view class="flex" style="font-size:14px;">
-            <view class="wordwarp" style="margin-right:4px;" wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</view>
+          <view class="flex" style="font-size:28rpx;">
+            <view class="wordwarp" style="margin-right:8rpx;" wx:if="{{fromLoaction.addresseeName}}">{{fromLoaction.addresseeName}}</view>
             <view class="wordwarp" wx:if="{{fromLoaction.phoneNum}}">{{fromLoaction.phoneNum}}</view>
           </view>
         </view>
@@ -29,11 +29,11 @@
         <view class='dot' style="background:#ec8b89;"></view>
         <view class="midelText" data-locationtype='to' bindtap='choiceLoaction'>
           <view class="flex" style="color:#333;">
-            <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
+            <text class="wordwarp" style="margin-right:8rpx;" wx:if="{{toLoaction.addressName}}">{{toLoaction.addressName}}</text>
             <text class="wordwarp" wx:if="{{toLoaction.addressDetail}}">{{toLoaction.addressDetail}}</text>
           </view>
-          <view class="flex" style="font-size:14px;">
-            <text class="wordwarp" style="margin-right:4px;" wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
+          <view class="flex" style="font-size:28rpx;">
+            <text class="wordwarp" style="margin-right:8rpx;" wx:if="{{toLoaction.addresseeName}}">{{toLoaction.addresseeName}}</text>
             <text class="wordwarp" wx:if="{{toLoaction.phoneNum}}">{{toLoaction.phoneNum}}</text>
           </view>
         </view>
@@ -43,12 +43,12 @@
       </view>
     </view>
     <view class='remarks'>
-      <text style="color:#333;width:44px;">备注：</text>
+      <text style="color:#333;width:88rpx;">备注：</text>
       <input placeholder='物品描述或者送件要求' bindinput='remarkChange' style='flex:1'></input>
     </view>
 
     <view class='tips'>
-      <text style="color:#333;width:44px;">小费：</text>
+      <text style="color:#333;width:88rpx;">小费：</text>
       <input placeholder='加小费抢单更快哦！单位（元）' type='number' bindinput="tipChange" style='flex:1'></input>
     </view>
   </view>

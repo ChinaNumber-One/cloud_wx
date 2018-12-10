@@ -15,8 +15,7 @@ page {
 }
 .tabBox {
   width: 90%;
-  min-height: 380rpx;
-  /* height: 480rpx; */
+  height: 458rpx;
   margin: 10px auto;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
@@ -34,23 +33,25 @@ page {
   margin-bottom: 10px;
 }
 .sendBar, .buyBar {
-  line-height: 24px;
-  margin: 5px 20px;
-  padding-bottom: 6px;
+  line-height: 48rpx;
+  margin: 10rpx 40rpx;
+  padding-bottom: 12rpx;
   box-sizing: border-box;
-  height: 30px;
+  height: 60rpx;
+  font-size: 36rpx;
 }
 .activeBar {
-  border-bottom: 3px solid #ffbf1c;
+  border-bottom: 6rpx solid #ffbf1c;
 }
 
 .inputBox {
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
   border-bottom: 1px solid #eee;
+  min-height: 106rpx;
 }
 .inputBox, .sendThingskinds {
   /* position: relative; */
-  padding:0 10px;
+  padding:0 20rpx;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -58,47 +59,42 @@ page {
   align-items: center;
 }
 .dot {
-  /* position: absolute; */
-  width: 6px;
-  height: 6px;
+  width: 12rpx;
+  height: 12rpx;
   border-radius: 50%;
-  margin-right: 10px;
-  /* left: 7px;
-  top: 15px; */
+  margin-right: 20rpx;
 }
 .input {
   
-  padding: 5px 0;
-  font-size: 16px;
+  padding: 10rpx 0;
+  font-size: 32rpx;
   flex: 1;
   color: #666;
 }
 .sendThingskinds{
-  font-size: 14px;
+  font-size: 28rpx;
   color: #666;
-  height: 34px;
-  line-height: 34px;
+  height: 68rpx;
+  line-height: 68rpx;
 }
 .icon-you {
-  height: 34px;
-  line-height: 34px;
+  height: 68rpx;
+  line-height: 68rpx;
   font-weight: bold;
-  /* margin-right: 10px; */
-  /* width: 30px; */
   text-align: center;
 }
 .sendThingskindsText {
   flex: 1;
 }
 .addresseeBookBtn {
-  font-size: 14px;
+  font-size: 28rpx;
   color: 	#1E90FF;
 }
 .flex {
   display: flex;
 }
 .wordwarp {
-  max-width: 100px;
+  max-width: 200rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -108,8 +104,26 @@ page {
 }
 .locationIcon {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 40rpx;
+  right: 40rpx;
   width: 30px;
   height: 30px;
 }
+.buyThings {
+  line-height: 100px;
+  text-align: center;
+}
+.runers {
+  position: relative;
+  width: 140px;
+  height: 24px;
+  font-size: 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 60px auto;
+  line-height: 24px;
+  border-radius: 14px;
+  text-align: center;
+  padding: 0 20rpx;
+}
+

@@ -176,7 +176,7 @@ Page({
   },
   mustFill(){
     this.setData({
-      btnClick: this.data.detail !== '' && this.data.name !== '' && this.data.phoneNum !== ''
+      btnClick: this.data.detail !== '' && this.data.name !== '' && this.data.phoneNum !== '' && this.data.position!=='请点击选择地址',
     })
   },
   back(){

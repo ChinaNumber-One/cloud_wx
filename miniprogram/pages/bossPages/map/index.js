@@ -33,19 +33,19 @@ Page({
     locationType: '', // 即将要选择地址的 type
     sendThingskindsText: '要配送的物品类型、重量',
     markers: [{},{}],
-    polyline:[]
+    polyline:[],
+    district:'',
+    runersText:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.fromLoaction)
     if (app.globalData.openid) {
       this.setData({
         openid: app.globalData.openid
       })
-      this.getlocation()
       if (options.positionType){
         this.setData({
           lastPageLocationType: options.positionType
@@ -64,7 +64,6 @@ Page({
   },
   handelStartPos(data){
     let res = data.data
-    console.log(res)
     let startMarker = {
       id: 'from',
       latitude: res.latitude,
@@ -84,8 +83,9 @@ Page({
         textAlign: 'center'
       }
     }
+    console.log(this.data.markers)
     this.data.markers[0] = startMarker
-   
+    console.log(this.data.markers)
 
     this.setData({
       fromLoaction: {
@@ -99,29 +99,22 @@ Page({
       },
       markers: this.data.markers
     })
-    console.log(this.data.markers)
-    console.log(this.data.fromLoaction)
-    this.mapCtx.includePoints({
-      points: [{
-        latitude: res.latitude,
-        longitude: res.longitude
-      }, {
-        latitude: this.data.latitude,
-        longitude: this.data.longitude
-      }],
-      padding: [30]
-    })
-    console.log([{
-      latitude: res.latitude,
-      longitude: res.longitude
-    }, {
-      latitude: this.data.latitude,
-      longitude: this.data.longitude
-    }])
-    this.bicyclingLine()
+    if (this.data.lastPageLocationType === 'from') {
+      this.mapCtx.includePoints({
+        points: [{
+          latitude: res.latitude,
+          longitude: res.longitude
+        }, {
+          latitude: this.data.latitude,
+          longitude: this.data.longitude
+        }],
+        padding: [100, 100, 100, 100]
+      })
+    }
+    
   },
   handelEndPos(data){
-    console.log('endpos')
+
     let res = data.data
     // 选择  到达地点
     let endMarkder = {
@@ -154,19 +147,9 @@ Page({
         addresseeName: res.addresseeName,
         phoneNum: res.phoneNum
       },
-      markers: this.data.markers,
+      markers: this.data.markers.splice(0,2),
       warn:'warnColor',
     })
-    // this.mapCtx.includePoints({
-    //   points: [{
-    //     latitude: res.latitude,
-    //     longitude: res.longitude
-    //   }, {
-    //       latitude: this.data.latitude,
-    //       longitude: this.data.longitude
-    //     }],
-    //   padding: [30]
-    // })
     this.bicyclingLine()
   },
   choiceThingsType(){
@@ -181,11 +164,38 @@ Page({
       success: this.handleGetLocationSucc.bind(this)
     })
   },
-  handleGetLocationSucc(res) {   
+  handleGetLocationSucc(res) {  
     this.setData({
       latitude: res.latitude,
       longitude: res.longitude
     })
+    if (this.data.lastPageLocationType !== 'to'){
+      console.log('--------------runners----------------')
+      const db = wx.cloud.database()
+      db.collection('userInfo').where({
+        _openid: app.globalData.openid
+      }).get({
+        success: res => {
+          // this.setData({
+          //   district: res.data[0].district
+          // })
+          this.getRunners(res.data[0].town)
+          this.timer = setInterval(() => {
+            this.getRunners(res.data[0].town)
+
+          }, 5000)
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+        }
+      })
+    } else {
+      clearInterval(this.timer)
+    }
+    
     if ( this.data.lastPageLocationType === 'from') {
       wx.getStorage({
         key: 'startPosition',
@@ -210,6 +220,7 @@ Page({
         }
       })
     }
+    
   },
   // 送/买 ？
   changeTypes(e) {
@@ -271,7 +282,7 @@ Page({
         //设置polyline属性，将路线显示出来
         _this.mapCtx.includePoints({
           points:pl,
-          padding:[30]
+          padding:[100,100,100,100]
         })
         _this.setData({
           polyline: [{
@@ -293,17 +304,49 @@ Page({
   moveToLocation(){
     this.mapCtx.moveToLocation();
   },
+  getRunners(town){
+    this.data.markers.splice(2, this.data.markers.length - 2)
+    const runersArr = []
+    wx.cloud.callFunction({
+      name: 'aroundRuners',
+      success: (result) => {
+        if (result.result.data.length > 0) {
+          let aroundRunersArr = result.result.data.filter((item, index) => {
+            if (item.town === town && item.identity === 'run' && item._openid !== app.globalData.openid) {
+              runersArr.push({
+                id: 'runers' + index,
+                latitude: item.latitude,
+                longitude: item.longitude,
+                width: 50,
+                height: 50,
+                iconPath: '/images/runningBear.png',
+              })
+              return true
+            }
+          })
+          let newMarkers = this.data.markers.concat(runersArr)
+          this.setData({
+            markers: newMarkers,
+            runersText: '附近有' + (newMarkers.length - 2) + '名奔跑侠～'
+          })
+        }
+      }, fail: function (res) {
+        console.log(res)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.mapCtx = wx.createMapContext('map', this)
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.mapCtx = wx.createMapContext('map', this)
     this.getlocation()
     
   },
@@ -312,14 +355,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide')
+    clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log('onUnload')
   },
 
   /**

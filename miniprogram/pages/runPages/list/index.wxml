@@ -16,7 +16,7 @@
 
     <view class="item_content">
       <view class='item_content_l'>
-        <view class='text'>{{distance[index]}}m</view>
+        <view class='text'>{{distance[index].distance}}m</view>
         <view class='text'>取货</view>
         <view class="line"></view>
         <view class='text'>{{item.distance}}km</view>

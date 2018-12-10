@@ -1,9 +1,9 @@
 .list {
-  padding: 10px;
+  padding: 20rpx;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-bottom: 20px;
+  padding-bottom: 40rpx;
   border-bottom: 1px solid #ccc;
 }
 .item {
@@ -12,11 +12,11 @@
   width: 200rpx;
   text-align: center;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
 }
 .weight {
-  padding-top: 20px;
+  padding-top: 40rpx;
   text-align: center;
 }
 .sliderBox {
@@ -27,7 +27,7 @@ slider {
   margin: 0 auto;
 }
 .weightNum {
-  margin: 14px;
+  margin: 30rpx;
   color: #FF7F50;
 }
 .activeType {
@@ -41,5 +41,8 @@ slider {
   width: 90%;
   background: 	#FF7F50;
   color: #fff;
-  margin-top: 40px;
+  margin-top: 80rpx;
+  height: 92rpx;
+  line-height: 92rpx;
+  font-size: 36rpx;
 }

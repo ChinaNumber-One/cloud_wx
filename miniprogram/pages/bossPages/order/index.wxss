@@ -5,38 +5,37 @@
   flex-direction: column;
 }
 .map{
-  /* height: 200px; */
   width: 100%;
   flex: 1;
-}
-.info {
-  /* height: 253px; */
 }
 .sendThingskinds, .remarks, .tips {
 
   position: relative;
-  padding:0 10px;
+  padding:0 20rpx;
   width: 90%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   border: 1px solid #eee;
-  margin: 5px auto;
+  margin: 10rpx auto;
   color: #666;
   background: #fff;
   height: 100rpx;
-  font-size: 14px;
+  font-size: 28rpx;
   text-align: left;
 }
+.sendThingskinds {
+  height: 80rpx;
+}
 .addressBox {
-  padding:0 10px;
+  padding:0 20rpx;
   width: 90%;
   box-sizing: border-box;
   border: 1px solid #eee;
-  margin: 10px auto;
+  margin: 5rpx auto;
   color: #666;
   background: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   text-align: left;
 }
 .address {
@@ -45,28 +44,25 @@
   justify-content: space-between;
 }
 .dot {
-  /* position: absolute; */
-  width: 8px;
-  height: 8px;
+  width: 16rpx;
+  height: 16rpx;
   border-radius: 50%;
-  margin-right: 10px;
-  /* left: 7px;
-  top: 15px; */
+  margin-right: 20rpx;
 }
 .page {
   background: #f7f7f7;
   width: 100%; 
 }
 .addresseeBookBtn {
-  width: 60px;
+  width: 120rpx;
   text-align: center;
-  font-size: 14px;
+  font-size: 28rpx;
   color: 	#1E90FF;
 }
 .midelText {
   flex: 1;
   text-align: left;
-  padding: 5px 0;
+  padding: 10rpx 0;
 }
 .flex {
   display: flex;
@@ -80,47 +76,52 @@
 }
 .iconyou {
   position: absolute;
-  right: 20px;
-  font-size: 12px;
+  right: 40rpx;
+  font-size: 24rpx;
   font-weight: 900;
 }
 .bottom {
   height: 128rpx;
   background: #fff;
-  padding: 0 20px;
+  padding: 0 40rpx;
   display: flex;
   justify-content: space-between;
 }
 .bottom_l {
   line-height: 128rpx;
-  font-size: 14px;
+  font-size: 28rpx;
   flex: 1;
 }
 .priceNum {
-  font-size: 22px;
-  margin:0 4px;
+  font-size: 44rpx;
+  margin:0 8rpx;
 }
 .priceIcon, .priceNum {
   color: red;
 }
 .submit {
   width: 40%;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   margin-top: 20rpx;
   background:	#FF7F50;
   color: #fff;
+  font-size: 36rpx;
 }
 .wordwarp {
-  max-width: 100px;
+  max-width: 200rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .locationIcon {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 40rpx;
+  right: 40rpx;
   width: 30px;
   height: 30px;
+}
+input {
+  height: 100rpx;
+  line-height: 100rpx;
 }

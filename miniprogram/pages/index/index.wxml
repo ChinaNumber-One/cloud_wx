@@ -4,8 +4,7 @@
     <!-- <text class='iconfont icon-benpao'></text> -->
     <button open-type="getUserInfo" 
             data-identity='run'
-            bindgetuserinfo="onGetUserInfo" 
-            bindtap="onGetOpenid"
+            bindgetuserinfo="onGetRunUserInfo" 
             class="userinfo-avatar" 
             >我选择奔跑侠</button>
   </view>
@@ -13,8 +12,7 @@
     <!-- <text class='iconfont icon-kehu'></text> -->
     <button open-type="getUserInfo" 
             data-identity='boss'
-            bindgetuserinfo="onGetUserInfo" 
-            bindtap="onGetOpenid"
+            bindgetuserinfo="onGetBossUserInfo" 
             class="userinfo-avatar" 
             >我选择Boss</button>
   </view>

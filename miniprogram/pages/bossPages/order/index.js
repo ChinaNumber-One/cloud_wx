@@ -52,15 +52,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getlocation()
     this.mapCtx = wx.createMapContext('map', this)
+    this.getlocation()
     wx.getSystemInfo({
       success: (res) => {
         this.setData({
@@ -126,7 +126,10 @@ Page({
         this.handelStartPos(value)
       }
     } catch (e) {
-      console.log(e)
+      wx.hideLoading()
+      wx.showToast({
+        title: '填写数据发生未知错误，请重新填写！',
+      })
     }
 
     try {
@@ -135,7 +138,11 @@ Page({
         this.handelEndPos(value)
       }
     } catch (e) {
-      console.log(e)
+      wx.hideLoading()
+      wx.hideLoading()
+      wx.showToast({
+        title: '填写数据发生未知错误，请重新填写！',
+      })
     }
 
     try {
@@ -144,20 +151,12 @@ Page({
         this.handelThingsType(value)
       }
     } catch (e) {
-      console.log(e)
+      wx.hideLoading()
+      wx.hideLoading()
+      wx.showToast({
+        title: '填写数据发生未知错误，请重新填写！',
+      })
     }
-    // wx.getStorageSync({
-    //   key: 'startPosition',
-    //   success: this.handelStartPos.bind(this)
-    // })
-    // wx.getStorageSync({
-    //   key: 'endPosition',
-    //   success: this.handelEndPos.bind(this)
-    // })
-    // wx.getStorageSync({
-    //   key: 'thingsType',
-    //   success: this.handelThingsType.bind(this)
-    // })
   },
   handelStartPos(res) {
     let startMarker = {
@@ -195,30 +194,8 @@ Page({
       },
       markers: this.data.markers
     })
-    // console.log(this.data.markers)
-    // console.log(this.data.fromLoaction)
-    // this.mapCtx.includePoints({
-    //   // points: [{
-    //   //   latitude: res.latitude,
-    //   //   longitude: res.longitude
-    //   // }, {
-    //   //   latitude: this.data.latitude,
-    //   //   longitude: this.data.longitude
-    //   // }],
-    //   // padding: [0]
-    // })
-    // console.log([{
-    //   latitude: res.latitude,
-    //   longitude: res.longitude
-    // }, {
-    //   latitude: this.data.latitude,
-    //   longitude: this.data.longitude
-    // }])
-    this.bicyclingLine()
   },
   handelEndPos(res) {
-    // console.log('endpos')
-    // let res = data.data
     // 选择  到达地点
     let endMarkder = {
       id: 'to',
@@ -253,16 +230,6 @@ Page({
       markers: this.data.markers,
       warn: 'warnColor',
     })
-    // this.mapCtx.includePoints({
-    //   points: [{
-    //     latitude: res.latitude,
-    //     longitude: res.longitude
-    //   }, {
-    //       latitude: this.data.latitude,
-    //       longitude: this.data.longitude
-    //     }],
-    //   padding: [30]
-    // })
     this.bicyclingLine()
     this.drivingDistance()
   },
@@ -346,7 +313,7 @@ Page({
         //设置polyline属性，将路线显示出来
         _this.mapCtx.includePoints({
           points: pl,
-          padding: [30]
+          padding: [100,100,100,100]
         })
         _this.setData({
           polyline: [{
@@ -461,43 +428,6 @@ Page({
             console.log(res)
           }
         })
-        // db.collection('order').add({
-        //   data: {
-        //     boss: {
-        //       openid:app.globalData.openid,
-        //       arriveDate: this.data.arriveDate,
-        //       distance: this.data.distance,
-        //       startPosition: this.data.fromLoaction,
-        //       endPosition: this.data.toLoaction,
-        //       sendThingsKind: this.data.sendThingskindsText,
-        //       weight: this.data.weight,
-        //       price: this.data.totalPrice,
-        //       tip: this.data.tip,
-        //       remark: this.data.remarkText,
-        //       code: this.data.code,
-        //       phoneNum: res.data[0].phoneNum
-        //     },
-        //     runOpenid:'',
-        //     state: 0,
-        //     orderCreateTime: new Date().getFullYear() + '-' + ((new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '-' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + ' ' + (new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()) + ':' + (new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()) + ':' + (new Date().getSeconds() < 10 ? '0' + new Date().getSeconds() : new Date().getSeconds()),
-        //     orderCreateId: app.globalData.openid + new Date().getTime()
-        //   },
-        //   success: res => {
-        //     wx.navigateTo({
-        //       url: '/pages/index/index',
-        //     })
-        //     console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
-        //     wx.hideLoading()
-        //   },
-        //   fail: err => {
-        //     wx.showToast({
-        //       icon: 'none',
-        //       title: '下单失败请重试！'
-        //     })
-        //     wx.hideLoading()
-        //     console.error('[数据库] [新增记录] 失败：', err)
-        //   }
-        // })
       }
     })
     
